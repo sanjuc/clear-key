@@ -23,7 +23,7 @@ navigator.requestMediaKeySystemAccess('org.w3.clearkey', config
             }
         ).then(
             function (mediaKeys) {
-                console.log("Successfully set MediaKeys on video object");
+                console.warn("Successfully set MediaKeys on video object");
                 playMedia();
             }
         ).catch(
@@ -57,7 +57,7 @@ function handleEncrypted(e) {
     if (--expectedEncryptedEvents === 0) {
         html5video.removeEventListener("encrypted", handleEncrypted, false);
     }
-    console.info('Media is Encrypted : ' + e)
+    console.warn('Media is Encrypted : ' + e)
 
     // get the mediaKeys from html5video
     var mediaKeys = html5video.mediaKeys;
@@ -88,6 +88,7 @@ function handleEncrypted(e) {
 function handleMessage(event) {
     console.info(event)
     var keySession = event.target;
+    console.warn('MediaKeySession : ' + event.target);
     var te = new TextEncoder();
     var license = te.encode('{"keys":[{"kty":"oct","k":"hyN9IKGfWKdAwFaE5pm0qg","kid":"oW5AK5BW43HzbTSKpiu3SQ"}],"type":"temporary"}');
     keySession.update(license).catch(
@@ -99,5 +100,5 @@ function handleMessage(event) {
 
 
 function onPlaying() {
-    console.log('Media started playing')
+    console.warn('Media started playing')
 }
