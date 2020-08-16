@@ -4,21 +4,19 @@
         <title>clear-key</title>
         <!-- DASH reference implementation -->
         <script src="script/dash.all.js"></script>
-        <script>
-            // setup the video element and attach it to the Dash player
-            function setupVideo() {
-                var url = "./media/stream_en.mpd";
-                var context = new Dash.di.DashContext();
-                var player = new MediaPlayer(context);
-                player.startup();
-                player.attachView(document.querySelector("#html5video"));
-                player.attachSource(url);
-            }
-        </script>
     </head>
-    <body onload="setupVideo()">
+    <body>
         <video id="html5video" width="80%" height="80%" controls>
         </video>
+        <script>
+            // setup the video element and attach it to the Dash player
+            var url = "./media/stream_en.mpd";
+            var context = new Dash.di.DashContext();
+            var player = new MediaPlayer(context);
+            player.startup();
+            player.attachView(document.querySelector("#html5video"));
+            player.attachSource(url);
+        </script>
         <script src="script/main.js"></script>
     </body>
 </html>
